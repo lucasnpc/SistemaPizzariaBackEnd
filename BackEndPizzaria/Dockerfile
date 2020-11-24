@@ -20,3 +20,8 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BackEndPizzaria.dll"]
+
+RUN useradd -m myappuser
+USER myappuser
+
+CMD ASPNETCORE_URLS="http://*:$PORT" dotnet psa-server-dotnetcore.dll
