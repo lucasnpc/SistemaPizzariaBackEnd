@@ -10,5 +10,6 @@ namespace BackEndPizzaria.Context
 
         }
         public DbSet<Pizzaria> pizzarias { get; set; }
+        public DbSet<UsuarioPizzaria> users { get; set; }
     }
 }
