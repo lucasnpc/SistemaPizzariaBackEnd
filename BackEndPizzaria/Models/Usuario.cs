@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackEndPizzaria.Models
 {
-    public class UsuarioPizzaria
+    public class Usuario
     {
         [Key]
         public string userId { get; set; }

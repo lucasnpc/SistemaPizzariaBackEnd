@@ -17,6 +17,6 @@ namespace BackEndPizzaria.Models
         public string bairroPizzaria { get; set; }
         public string cidadePizzaria { get; set; }
         public string estadoPizzaria { get; set; }
-        public List<UsuarioPizzaria> usersPizzaria { get; set; }
+        public List<Usuario> usersPizzaria { get; set; }
     }
 }
