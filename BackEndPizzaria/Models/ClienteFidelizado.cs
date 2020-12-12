@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BackEndPizzaria.Models
 {
@@ -7,9 +8,10 @@ namespace BackEndPizzaria.Models
         [Key]
         public string cpfCliente { get; set; }
         public string nome { get; set; }
-        public string Rua { get; set; }
-        public string Numero { get; set; }
-        public string Bairro { get; set; }
-        public string Cidade { get; set; }
+        public string rua { get; set; }
+        public string numero { get; set; }
+        public string bairro { get; set; }
+        public string cidade { get; set; }
+        public List<Pedido> pedidos_cliente { get; set; }
     }
 }
