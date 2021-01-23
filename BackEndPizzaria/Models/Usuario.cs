@@ -8,6 +8,6 @@ namespace BackEndPizzaria.Models
         [Key]
         public string userId { get; set; }
         public string userSenha { get; set; }
-        public Pizzaria pizzaria { get; set; }
+        public Negocio pizzaria { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace BackEndPizzaria.Context
         public DbSet<Funcionario> funcionarios { get; set; }
         public DbSet<Itens> itens { get; set; }
         public DbSet<Pedido> pedidos { get; set; }
-        public DbSet<Pizzaria> pizzarias { get; set; }
+        public DbSet<Negocio> pizzarias { get; set; }
         public DbSet<Produto> produtos { get; set; }
         public DbSet<Usuario> users { get; set; }
         public DbSet<Venda> vendas { get; set; }

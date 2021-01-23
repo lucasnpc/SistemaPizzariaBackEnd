@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BackEndPizzaria.Models
 {
-    public class Pizzaria
+    public class Negocio
     {
         [Key]
         public string idPizzaria { get; set; }

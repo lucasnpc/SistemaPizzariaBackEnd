@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace BackEndPizzaria.Controllers
 {
     [ApiController]
-    [Route("pizzarias")]
-    public class PizzariaController: ControllerBase
+    [Route("negocios")]
+    public class NegocioController: ControllerBase
     {
         private readonly PizzariaContext _context;
-        private readonly ILogger<PizzariaController> _logger;
+        private readonly ILogger<NegocioController> _logger;
 
-        public PizzariaController(ILogger<PizzariaController> logger, PizzariaContext context)
+        public NegocioController(ILogger<NegocioController> logger, PizzariaContext context)
         {
             _context = context;
             _logger = logger;
@@ -21,7 +21,7 @@ namespace BackEndPizzaria.Controllers
 
         [Route("post")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Pizzaria pizzaria)
+        public async Task<IActionResult> Post([FromBody] Negocio pizzaria)
         {
             _logger.LogInformation(1002, "Post {pizzaria} da request", pizzaria);
             _context.pizzarias.Add(pizzaria);
