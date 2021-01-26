@@ -23,16 +23,16 @@ namespace BackEndPizzaria.Controllers
 
         [Route("authUser")]
         [HttpPost]
-        public Boolean AuthUser([FromBody] Usuario usuario)
+        public bool AuthUser([FromBody] Usuario usuario)
         {
             _logger.LogInformation(1002, "Post user={usuario} senha={senha}", usuario.userId, usuario.userSenha);
             var user = (from u in _context.users
-                       where u.userId == usuario.userId && u.userSenha == usuario.userSenha
-                       select u).Single();
-            if (user != null)
-                return true;
-            else
+                        where u.userId == usuario.userId && u.userSenha == usuario.userSenha
+                        select u).Single();
+            if (user == null)
                 return false;
+
+            return true;
         }
 
     }

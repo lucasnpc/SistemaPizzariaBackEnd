@@ -12,6 +12,6 @@ namespace BackEndPizzaria.Models
         public string numero { get; set; }
         public string bairro { get; set; }
         public string cidade { get; set; }
-        public List<Pedido> pedidos_cliente { get; set; }
+        public List<Pedido> pedidosCliente { get; set; }
     }
 }
