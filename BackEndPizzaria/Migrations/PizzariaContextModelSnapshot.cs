@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEndPizzaria.Migrations
 {
-    [DbContext(typeof(PizzariaContext))]
+    [DbContext(typeof(RestaurantePizzariaContext))]
     partial class PizzariaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

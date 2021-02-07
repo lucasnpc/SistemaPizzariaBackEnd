@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackEndPizzaria.Context
 {
-    public class PizzariaContext : DbContext
+    public class RestaurantePizzariaContext : DbContext
     {
-        public PizzariaContext(DbContextOptions options) : base(options)
+        public RestaurantePizzariaContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -22,6 +22,5 @@ namespace BackEndPizzaria.Context
         public DbSet<Produto> produtos { get; set; }
         public DbSet<Usuario> users { get; set; }
         public DbSet<Venda> vendas { get; set; }
-        public DbSet<WhatsApp> notificacaoWpp { get; set; }
     }
 }

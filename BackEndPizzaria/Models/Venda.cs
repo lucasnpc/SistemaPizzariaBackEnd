@@ -7,11 +7,10 @@ namespace BackEndPizzaria.Models
     public class Venda
     {
         [Key]
-        public string id_venda { get; set; }
-        public DateTime data_venda { get; set; }
-        public double valor_venda { get; set; }
-        public List<Itens> itens_vendidos { get; set; }
-        public string tipo_venda { get; set; }
+        public string idVenda { get; set; }
+        public DateTime dataVenda { get; set; }
+        public double valorVenda { get; set; }
+        public string tipoVenda { get; set; }
         public Comanda idComanda { get; set; }
         public Pedido idPedido { get; set; }
     }

@@ -7,7 +7,7 @@ namespace BackEndPizzaria.Models
     {
         [Key]
         public string cnpj { get; set; }
-        public string razao_social { get; set; }
+        public string razaoSocial { get; set; }
         public string rua { get; set; }
         public string numero { get; set; }
         public string bairro { get; set; }

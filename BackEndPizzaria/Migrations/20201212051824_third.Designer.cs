@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEndPizzaria.Migrations
 {
-    [DbContext(typeof(PizzariaContext))]
+    [DbContext(typeof(RestaurantePizzariaContext))]
     [Migration("20201212051824_third")]
     partial class third
     {

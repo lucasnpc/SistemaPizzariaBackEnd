@@ -21,7 +21,7 @@ namespace BackEndPizzaria
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<PizzariaContext>(options => options.UseNpgsql(Configuration.GetConnectionString("pizzaria-connection")));
+            services.AddDbContext<RestaurantePizzariaContext>(options => options.UseNpgsql(Configuration.GetConnectionString("pizzaria-connection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

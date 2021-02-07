@@ -6,13 +6,13 @@ namespace BackEndPizzaria.Models
     public class Negocio
     {
         [Key]
-        public string idPizzaria { get; set; }
-        public string nomePizzaria { get; set; }
-        public string ruaPizzaria { get; set; }
-        public string numeroPizzaria { get; set; }
-        public string bairroPizzaria { get; set; }
-        public string cidadePizzaria { get; set; }
-        public string estadoPizzaria { get; set; }
-        public List<Usuario> usersPizzaria { get; set; }
+        public string idNegocio { get; set; }
+        public string nomeNegocio { get; set; }
+        public string ruaNegocio { get; set; }
+        public string numeroNegocio { get; set; }
+        public string bairroNegocio { get; set; }
+        public string cidadeNegocio { get; set; }
+        public string estadoNegocio { get; set; }
+        public List<Usuario> usersNegocio { get; set; }
     }
 }

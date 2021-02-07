@@ -8,12 +8,12 @@ namespace BackEndPizzaria.Controllers
 {
     [ApiController]
     [Route("negocios")]
-    public class NegocioController: ControllerBase
+    public class RestaurentePizzariaController: ControllerBase
     {
-        private readonly PizzariaContext _context;
-        private readonly ILogger<NegocioController> _logger;
+        private readonly RestaurantePizzariaContext _context;
+        private readonly ILogger<RestaurentePizzariaController> _logger;
 
-        public NegocioController(ILogger<NegocioController> logger, PizzariaContext context)
+        public RestaurentePizzariaController(ILogger<RestaurentePizzariaController> logger, RestaurantePizzariaContext context)
         {
             _context = context;
             _logger = logger;

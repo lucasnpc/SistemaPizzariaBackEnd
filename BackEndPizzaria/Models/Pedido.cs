@@ -6,13 +6,13 @@ namespace BackEndPizzaria.Models
     public class Pedido
     {
         [Key]
-        public int id_pedido { get; set; }
+        public int idPedido { get; set; }
         public List<Itens> itens { get; set; }
-        public string rua_entrega { get; set; }
-        public string numero_entrega { get; set; }
-        public string bairro_entrega { get; set; }
-        public string cidade_entrega { get; set; }
+        public string ruaEntrega { get; set; }
+        public string numeroEntrega { get; set; }
+        public string bairroEntrega { get; set; }
+        public string cidadeEntrega { get; set; }
         public ClienteFidelizado clienteFidelizado { get; set; }
-        public double valor_conta { get; set; }
+        public double valorConta { get; set; }
     }
 }

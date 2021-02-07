@@ -11,10 +11,10 @@ namespace BackEndPizzaria.Controllers
     [Route("users")]
     public class UserController: ControllerBase
     {
-        private readonly PizzariaContext _context;
+        private readonly RestaurantePizzariaContext _context;
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger, PizzariaContext context)
+        public UserController(ILogger<UserController> logger, RestaurantePizzariaContext context)
         {
             _context = context;
             _logger = logger;

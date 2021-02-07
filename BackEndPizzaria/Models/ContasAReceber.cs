@@ -6,9 +6,9 @@ namespace BackEndPizzaria.Models
     public class ContasAReceber
     {
         [Key]
-        public int id_conta { get; set; }
+        public int idConta { get; set; }
         public double valor { get; set; }
         public string descricao { get; set; }
-        public DateTime data_recebimento { get; set; }
+        public DateTime dataRecebido { get; set; }
     }
 }

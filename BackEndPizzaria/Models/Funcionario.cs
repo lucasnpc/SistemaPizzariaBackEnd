@@ -14,7 +14,8 @@ namespace BackEndPizzaria.Models
         public string cidade { get; set; }
         public string telefone { get; set; }
         public string cargo { get; set; }
-        public DateTime data_admissão { get; set; }
+        public DateTime dataAdmissao { get; set; }
+        public DateTime dataNascimento { get; set; }
 
     }
 }

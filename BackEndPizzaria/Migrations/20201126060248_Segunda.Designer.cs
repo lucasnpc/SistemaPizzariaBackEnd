@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEndPizzaria.Migrations
 {
-    [DbContext(typeof(PizzariaContext))]
+    [DbContext(typeof(RestaurantePizzariaContext))]
     [Migration("20201126060248_Segunda")]
     partial class Segunda
     {
