@@ -24,7 +24,7 @@ namespace BackEndPizzaria.Controllers
         public async Task<IActionResult> Post([FromBody] Negocio pizzaria)
         {
             _logger.LogInformation(1002, "Post {pizzaria} da request", pizzaria);
-            _context.pizzarias.Add(pizzaria);
+            _context.negocios.Add(pizzaria);
             await _context.SaveChangesAsync();
             return Ok(200);
         }

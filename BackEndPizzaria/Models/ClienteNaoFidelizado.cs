@@ -6,7 +6,7 @@ namespace BackEndPizzaria.Models
     {
 
         [Key]
-        public string IdCliente { get; set; }
+        public int IdCliente { get; set; }
         public string nome { get; set; }
         public string rua { get; set; }
         public string numero { get; set; }
