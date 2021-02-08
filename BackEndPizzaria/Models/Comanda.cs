@@ -8,7 +8,8 @@ namespace BackEndPizzaria.Models
         [Key]
         public int idComanda { get; set; }
         public string numeroMesa { get; set; }
-        public List<Itens> itens { get; set; }
+        [Key]
+        public Itens itens { get; set; }
         public double valorConta { get; set; }
     }
 }

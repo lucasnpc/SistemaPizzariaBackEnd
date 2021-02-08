@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BackEndPizzaria.Migrations
 {
-    public partial class FixDatabase : Migration
+    public partial class Fix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,20 +41,6 @@ namespace BackEndPizzaria.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_clientesNaoFidelizados", x => x.IdCliente);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "comandas",
-                columns: table => new
-                {
-                    idComanda = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    numeroMesa = table.Column<string>(type: "text", nullable: true),
-                    valorConta = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_comandas", x => x.idComanda);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,6 +113,20 @@ namespace BackEndPizzaria.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "itensCardapio",
+                columns: table => new
+                {
+                    idItem = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    preco = table.Column<double>(type: "double precision", nullable: false),
+                    descricao = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_itensCardapio", x => x.idItem);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "negocios",
                 columns: table => new
                 {
@@ -144,11 +144,33 @@ namespace BackEndPizzaria.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "comandas",
+                columns: table => new
+                {
+                    idComanda = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    numeroMesa = table.Column<string>(type: "text", nullable: true),
+                    itensidItem = table.Column<int>(type: "integer", nullable: true),
+                    valorConta = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_comandas", x => x.idComanda);
+                    table.ForeignKey(
+                        name: "FK_comandas_itensCardapio_itensidItem",
+                        column: x => x.itensidItem,
+                        principalTable: "itensCardapio",
+                        principalColumn: "idItem",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "pedidos",
                 columns: table => new
                 {
                     idPedido = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    itensidItem = table.Column<int>(type: "integer", nullable: true),
                     ruaEntrega = table.Column<string>(type: "text", nullable: true),
                     numeroEntrega = table.Column<string>(type: "text", nullable: true),
                     bairroEntrega = table.Column<string>(type: "text", nullable: true),
@@ -164,6 +186,42 @@ namespace BackEndPizzaria.Migrations
                         column: x => x.clienteFidelizadocpfCliente,
                         principalTable: "clientesFidelizados",
                         principalColumn: "cpfCliente",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_pedidos_itensCardapio_itensidItem",
+                        column: x => x.itensidItem,
+                        principalTable: "itensCardapio",
+                        principalColumn: "idItem",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "produtos",
+                columns: table => new
+                {
+                    idProduto = table.Column<string>(type: "text", nullable: false),
+                    descricao = table.Column<string>(type: "text", nullable: true),
+                    estoqueMinimo = table.Column<double>(type: "double precision", nullable: false),
+                    estoqueMaximo = table.Column<double>(type: "double precision", nullable: false),
+                    quantidadeAtual = table.Column<double>(type: "double precision", nullable: false),
+                    valorCusto = table.Column<double>(type: "double precision", nullable: false),
+                    idFornecedorcnpj = table.Column<string>(type: "text", nullable: true),
+                    idItem1 = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_produtos", x => x.idProduto);
+                    table.ForeignKey(
+                        name: "FK_produtos_fornecedor_idFornecedorcnpj",
+                        column: x => x.idFornecedorcnpj,
+                        principalTable: "fornecedor",
+                        principalColumn: "cnpj",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_produtos_itensCardapio_idItem1",
+                        column: x => x.idItem1,
+                        principalTable: "itensCardapio",
+                        principalColumn: "idItem",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -183,34 +241,6 @@ namespace BackEndPizzaria.Migrations
                         column: x => x.pizzariaidNegocio,
                         principalTable: "negocios",
                         principalColumn: "idNegocio",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "itensCardapio",
-                columns: table => new
-                {
-                    id_item = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    preco = table.Column<double>(type: "double precision", nullable: false),
-                    descricao = table.Column<string>(type: "text", nullable: true),
-                    ComandaidComanda = table.Column<int>(type: "integer", nullable: true),
-                    PedidoidPedido = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_itensCardapio", x => x.id_item);
-                    table.ForeignKey(
-                        name: "FK_itensCardapio_comandas_ComandaidComanda",
-                        column: x => x.ComandaidComanda,
-                        principalTable: "comandas",
-                        principalColumn: "idComanda",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_itensCardapio_pedidos_PedidoidPedido",
-                        column: x => x.PedidoidPedido,
-                        principalTable: "pedidos",
-                        principalColumn: "idPedido",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -242,45 +272,10 @@ namespace BackEndPizzaria.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "produtos",
-                columns: table => new
-                {
-                    idProduto = table.Column<string>(type: "text", nullable: false),
-                    descricao = table.Column<string>(type: "text", nullable: true),
-                    estoqueMinimo = table.Column<double>(type: "double precision", nullable: false),
-                    estoqueMaximo = table.Column<double>(type: "double precision", nullable: false),
-                    quantidadeAtual = table.Column<double>(type: "double precision", nullable: false),
-                    valorCusto = table.Column<double>(type: "double precision", nullable: false),
-                    idFornecedorcnpj = table.Column<string>(type: "text", nullable: true),
-                    idItemid_item = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_produtos", x => x.idProduto);
-                    table.ForeignKey(
-                        name: "FK_produtos_fornecedor_idFornecedorcnpj",
-                        column: x => x.idFornecedorcnpj,
-                        principalTable: "fornecedor",
-                        principalColumn: "cnpj",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_produtos_itensCardapio_idItemid_item",
-                        column: x => x.idItemid_item,
-                        principalTable: "itensCardapio",
-                        principalColumn: "id_item",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_itensCardapio_ComandaidComanda",
-                table: "itensCardapio",
-                column: "ComandaidComanda");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_itensCardapio_PedidoidPedido",
-                table: "itensCardapio",
-                column: "PedidoidPedido");
+                name: "IX_comandas_itensidItem",
+                table: "comandas",
+                column: "itensidItem");
 
             migrationBuilder.CreateIndex(
                 name: "IX_pedidos_clienteFidelizadocpfCliente",
@@ -288,14 +283,19 @@ namespace BackEndPizzaria.Migrations
                 column: "clienteFidelizadocpfCliente");
 
             migrationBuilder.CreateIndex(
+                name: "IX_pedidos_itensidItem",
+                table: "pedidos",
+                column: "itensidItem");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_produtos_idFornecedorcnpj",
                 table: "produtos",
                 column: "idFornecedorcnpj");
 
             migrationBuilder.CreateIndex(
-                name: "IX_produtos_idItemid_item",
+                name: "IX_produtos_idItem1",
                 table: "produtos",
-                column: "idItemid_item");
+                column: "idItem1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_users_pizzariaidNegocio",
@@ -340,9 +340,6 @@ namespace BackEndPizzaria.Migrations
                 name: "fornecedor");
 
             migrationBuilder.DropTable(
-                name: "itensCardapio");
-
-            migrationBuilder.DropTable(
                 name: "negocios");
 
             migrationBuilder.DropTable(
@@ -353,6 +350,9 @@ namespace BackEndPizzaria.Migrations
 
             migrationBuilder.DropTable(
                 name: "clientesFidelizados");
+
+            migrationBuilder.DropTable(
+                name: "itensCardapio");
         }
     }
 }

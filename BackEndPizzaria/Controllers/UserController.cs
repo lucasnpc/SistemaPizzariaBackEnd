@@ -2,8 +2,8 @@
 using BackEndPizzaria.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BackEndPizzaria.Controllers
 {
@@ -23,16 +23,16 @@ namespace BackEndPizzaria.Controllers
 
         [Route("authUser")]
         [HttpPost]
-        public bool AuthUser([FromBody] Usuario usuario)
+        public async Task<IActionResult> AuthUser([FromBody] Usuario usuario)
         {
             _logger.LogInformation(1002, "Post user={usuario} senha={senha}", usuario.userId, usuario.userSenha);
             var user = (from u in _context.users
                         where u.userId == usuario.userId && u.userSenha == usuario.userSenha
                         select u).Single();
             if (user == null)
-                return false;
+                return NotFound(404);
 
-            return true;
+            return Ok(200);
         }
 
     }

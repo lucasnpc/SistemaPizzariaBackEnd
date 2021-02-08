@@ -84,6 +84,9 @@ namespace BackEndPizzaria.Migrations
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
 
+                    b.Property<int?>("itensidItem")
+                        .HasColumnType("integer");
+
                     b.Property<string>("numeroMesa")
                         .HasColumnType("text");
 
@@ -91,6 +94,8 @@ namespace BackEndPizzaria.Migrations
                         .HasColumnType("double precision");
 
                     b.HasKey("idComanda");
+
+                    b.HasIndex("itensidItem");
 
                     b.ToTable("comandas");
                 });
@@ -210,16 +215,10 @@ namespace BackEndPizzaria.Migrations
 
             modelBuilder.Entity("BackEndPizzaria.Models.Itens", b =>
                 {
-                    b.Property<int>("id_item")
+                    b.Property<int>("idItem")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .UseIdentityByDefaultColumn();
-
-                    b.Property<int?>("ComandaidComanda")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("PedidoidPedido")
-                        .HasColumnType("integer");
 
                     b.Property<string>("descricao")
                         .HasColumnType("text");
@@ -227,11 +226,7 @@ namespace BackEndPizzaria.Migrations
                     b.Property<double>("preco")
                         .HasColumnType("double precision");
 
-                    b.HasKey("id_item");
-
-                    b.HasIndex("ComandaidComanda");
-
-                    b.HasIndex("PedidoidPedido");
+                    b.HasKey("idItem");
 
                     b.ToTable("itensCardapio");
                 });
@@ -280,6 +275,9 @@ namespace BackEndPizzaria.Migrations
                     b.Property<string>("clienteFidelizadocpfCliente")
                         .HasColumnType("text");
 
+                    b.Property<int?>("itensidItem")
+                        .HasColumnType("integer");
+
                     b.Property<string>("numeroEntrega")
                         .HasColumnType("text");
 
@@ -292,6 +290,8 @@ namespace BackEndPizzaria.Migrations
                     b.HasKey("idPedido");
 
                     b.HasIndex("clienteFidelizadocpfCliente");
+
+                    b.HasIndex("itensidItem");
 
                     b.ToTable("pedidos");
                 });
@@ -313,7 +313,7 @@ namespace BackEndPizzaria.Migrations
                     b.Property<string>("idFornecedorcnpj")
                         .HasColumnType("text");
 
-                    b.Property<int?>("idItemid_item")
+                    b.Property<int?>("idItem1")
                         .HasColumnType("integer");
 
                     b.Property<double>("quantidadeAtual")
@@ -326,7 +326,7 @@ namespace BackEndPizzaria.Migrations
 
                     b.HasIndex("idFornecedorcnpj");
 
-                    b.HasIndex("idItemid_item");
+                    b.HasIndex("idItem1");
 
                     b.ToTable("produtos");
                 });
@@ -378,15 +378,13 @@ namespace BackEndPizzaria.Migrations
                     b.ToTable("vendas");
                 });
 
-            modelBuilder.Entity("BackEndPizzaria.Models.Itens", b =>
+            modelBuilder.Entity("BackEndPizzaria.Models.Comanda", b =>
                 {
-                    b.HasOne("BackEndPizzaria.Models.Comanda", null)
-                        .WithMany("itens")
-                        .HasForeignKey("ComandaidComanda");
+                    b.HasOne("BackEndPizzaria.Models.Itens", "itens")
+                        .WithMany()
+                        .HasForeignKey("itensidItem");
 
-                    b.HasOne("BackEndPizzaria.Models.Pedido", null)
-                        .WithMany("itens")
-                        .HasForeignKey("PedidoidPedido");
+                    b.Navigation("itens");
                 });
 
             modelBuilder.Entity("BackEndPizzaria.Models.Pedido", b =>
@@ -395,7 +393,13 @@ namespace BackEndPizzaria.Migrations
                         .WithMany("pedidosCliente")
                         .HasForeignKey("clienteFidelizadocpfCliente");
 
+                    b.HasOne("BackEndPizzaria.Models.Itens", "itens")
+                        .WithMany()
+                        .HasForeignKey("itensidItem");
+
                     b.Navigation("clienteFidelizado");
+
+                    b.Navigation("itens");
                 });
 
             modelBuilder.Entity("BackEndPizzaria.Models.Produto", b =>
@@ -406,7 +410,7 @@ namespace BackEndPizzaria.Migrations
 
                     b.HasOne("BackEndPizzaria.Models.Itens", "idItem")
                         .WithMany("ingredientes")
-                        .HasForeignKey("idItemid_item");
+                        .HasForeignKey("idItem1");
 
                     b.Navigation("idFornecedor");
 
@@ -442,11 +446,6 @@ namespace BackEndPizzaria.Migrations
                     b.Navigation("pedidosCliente");
                 });
 
-            modelBuilder.Entity("BackEndPizzaria.Models.Comanda", b =>
-                {
-                    b.Navigation("itens");
-                });
-
             modelBuilder.Entity("BackEndPizzaria.Models.Fornecedor", b =>
                 {
                     b.Navigation("produtos");
@@ -460,11 +459,6 @@ namespace BackEndPizzaria.Migrations
             modelBuilder.Entity("BackEndPizzaria.Models.Negocio", b =>
                 {
                     b.Navigation("usersNegocio");
-                });
-
-            modelBuilder.Entity("BackEndPizzaria.Models.Pedido", b =>
-                {
-                    b.Navigation("itens");
                 });
 #pragma warning restore 612, 618
         }
